@@ -1,4 +1,4 @@
-import tkinter as tk
+import customtkinter as ctk
 import json
 from tkinter import messagebox
 
@@ -30,48 +30,49 @@ def submit():
     with open('Logins.json', 'w') as f:
         json.dump(data, f, indent=4)
 
-    # 4. Clear the entry fields
-    Title_Entry.delete(0, tk.END)
-    User_Entry.delete(0, tk.END)
-    Password_Entry.delete(0, tk.END)
-    Website_Entry.delete(0, tk.END)
+    # Clear the entry fields
+    Title_Entry.delete(0, ctk.END)
+    User_Entry.delete(0, ctk.END)
+    Password_Entry.delete(0, ctk.END)
+    Website_Entry.delete(0, ctk.END)
 
     # Success message
     messagebox.showinfo("Success", "Data saved successfully!")
 
 # GUI Tkinter -----------------------------------------------------------------------------------------------------------------------------
 
-root = tk.Tk()
+root = ctk.CTk()
 root.title("Password Manager")
 root.geometry("600x600")
 
-App_Name = tk.Label(
+App_Name = ctk.CTkLabel(
     root,
     text ="Password Manager Tool",
     font=("Arial", 20, "bold")
     ).pack(pady=90)
 
-Title_Name = tk.Label(root, text ="Enter Title", font=("Arial", 12)).pack(pady=2)
-Title_Entry = tk.Entry(root)
+Title_Name = ctk.CTkLabel(root, text ="Enter Title", font=("Arial", 12)).pack(pady=2)
+Title_Entry = ctk.CTkEntry(root)
 Title_Entry.pack(pady=5)
 
-User_Name = tk.Label(root, text ="Enter Username", font=("Arial", 12)).pack(pady=2)
-User_Entry = tk.Entry(root)
+User_Name = ctk.CTkLabel(root, text ="Enter Username", font=("Arial", 12)).pack(pady=2)
+User_Entry = ctk.CTkEntry(root)
 User_Entry.pack(pady=5)
 
-Password_Lable = tk.Label(root, text ="Enter Password", font=("Arial", 12)).pack(pady=2)
-Password_Entry = tk.Entry(root)
+Password_Lable = ctk.CTkLabel(root, text ="Enter Password", font=("Arial", 12)).pack(pady=2)
+Password_Entry = ctk.CTkEntry(root)
 Password_Entry.pack(pady=5)
 
-Website_Lable = tk.Label(root, text ="Enter Website Link", font=("Arial", 12)).pack(pady=2)
-Website_Entry = tk.Entry(root)
+Website_Lable = ctk.CTkLabel(root, text ="Enter Website Link", font=("Arial", 12)).pack(pady=2)
+Website_Entry = ctk.CTkEntry(root)
 Website_Entry.pack(pady=5)
 
-submit_btn = tk.Button(
+submit_btn = ctk.CTkButton(
     root,
     text ="Submit",
     command= submit
     ) 
 submit_btn.pack(pady=10)
+
 
 root.mainloop()
