@@ -4,7 +4,7 @@ import customtkinter as ctk
 ctk.set_appearance_mode("dark")
 
 app = ctk.CTk()
-app.title("Modern Password Manager Dashboard")
+app.title("Modern Settings Dashboard")
 app.geometry("1100x650")
 app.configure(fg_color="#14161a")  # Deep dark backdrop
 
@@ -59,7 +59,7 @@ def create_menu_btn(text_name):
     btn = ctk.CTkButton(
         sidebar, 
         text=f"  {text_name}", 
-        font=(FONT_FAMILY, 14, "normal"),  # <-- FIXED: Changed "medium" to "normal"
+        font=(FONT_FAMILY, 14, "normal"),
         height=42,
         corner_radius=8,
         fg_color="transparent",
@@ -73,7 +73,7 @@ def create_menu_btn(text_name):
 
 # Create menu items
 create_menu_btn("Home")
-create_menu_btn("Password Manager")
+create_menu_btn("Settings")
 create_menu_btn("About")
 
 # -------------------- Content Container --------------------
@@ -84,20 +84,29 @@ content_container.grid_columnconfigure(0, weight=1)
 
 # Generate page shells
 pages["Home"] = ctk.CTkFrame(master=content_container, fg_color="transparent")
-pages["Password Manager"] = ctk.CTkFrame(master=content_container, fg_color="transparent")
+pages["Settings"] = ctk.CTkFrame(master=content_container, fg_color="transparent")
 pages["About"] = ctk.CTkFrame(master=content_container, fg_color="transparent")
 
-# -------------------- 1. Home Page --------------------
-label_home = ctk.CTkLabel(master=pages["Home"], text="Welcome to the Home Screen", font=(FONT_FAMILY, 22, "bold"), text_color="#ffffff")
-label_home.pack(pady=50, padx=50, anchor="w")
+# -------------------- 1. Home Page (Centered) --------------------
+# Configure Home grid layout to center contents
+pages["Home"].grid_rowconfigure(0, weight=1)
+pages["Home"].grid_columnconfigure(0, weight=1)
 
-# -------------------- 2. Password Manager Page (Modern Form) --------------------
+label_home = ctk.CTkLabel(
+    master=pages["Home"], 
+    text="Welcome to the Home Screen", 
+    font=(FONT_FAMILY, 24, "bold"), 
+    text_color="#ffffff"
+)
+label_home.grid(row=0, column=0)  # Placed right in the center cell
+
+# -------------------- 2. Settings Page (Modern Form) --------------------
 # Center alignment configuration
-pages["Password Manager"].grid_rowconfigure(0, weight=1)
-pages["Password Manager"].grid_columnconfigure(0, weight=1)
+pages["Settings"].grid_rowconfigure(0, weight=1)
+pages["Settings"].grid_columnconfigure(0, weight=1)
 
-# Password Manager Card Container
-card = ctk.CTkFrame(master=pages["Password Manager"], corner_radius=16, fg_color=COLOR_CARD_BG, border_width=1, border_color="#2d313b")
+# Settings Card Container
+card = ctk.CTkFrame(master=pages["Settings"], corner_radius=16, fg_color=COLOR_CARD_BG, border_width=1, border_color="#2d313b")
 card.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
 card.grid_rowconfigure(0, weight=1)
 card.grid_columnconfigure(0, weight=1)
@@ -109,7 +118,7 @@ form.grid(row=0, column=0, padx=50, pady=40)
 # Main Title
 title = ctk.CTkLabel(
     form, 
-    text="Save Your Password", 
+    text="User Settings", 
     font=(FONT_FAMILY, 26, "bold"),
     text_color="#ffffff"
 )
@@ -170,12 +179,22 @@ save_btn = ctk.CTkButton(
 )
 save_btn.grid(row=len(fields_data) + 1, column=0, columnspan=2, pady=(35, 0))
 
-# -------------------- 3. About Page --------------------
-label_about = ctk.CTkLabel(master=pages["About"], text="System Password Manager Panel\nVersion 1.0.0", font=(FONT_FAMILY, 14), text_color=COLOR_TEXT_MUTED, justify="left")
-label_about.pack(pady=50, padx=50, anchor="w")
+# -------------------- 3. About Page (Centered) --------------------
+# Configure About grid layout to center contents
+pages["About"].grid_rowconfigure(0, weight=1)
+pages["About"].grid_columnconfigure(0, weight=1)
+
+label_about = ctk.CTkLabel(
+    master=pages["About"], 
+    text="System Settings Panel\nVersion 1.0.0", 
+    font=(FONT_FAMILY, 16), 
+    text_color=COLOR_TEXT_MUTED, 
+    justify="center"
+)
+label_about.grid(row=0, column=0)  # Placed right in the center cell
 
 # -------------------- Application Loop initialization --------------------
-# Present Password Manager by default to reflect the target mockup state
-show_page("Password Manager")
+# Present Settings by default to reflect the target mockup state
+show_page("Settings")
 
 app.mainloop()
